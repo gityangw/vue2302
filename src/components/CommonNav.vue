@@ -1,33 +1,21 @@
 <template>
     这是子组件
-    <!-- <button @click="a=100">修改a</button> -->
-    {{ a }}
-    {{ b }}
-    {{ c }}
-    {{ d }}
+    <button @click="emitMsg">点击向父通信</button>
 </template>
 
 <script>
     export default {
-        props: {
-            a: String,
-            b: [String,Number],
-            c: {
-                type: Array,
-                required: true
-            },
-            d: {
-                type: String,
-                default: '默认值'
-            },
-            e: {
-                validator: (value) => {
-                return /^\w{2,5}$/.test(value)
-                }
-            },
+        data() {
+            return {
+                msg: '子组件数据',
+                arr: [1,2,3],
+                num:1
+            }
         },
-        mounted(){
-            console.log(this);
+        methods: {
+            emitMsg() {
+                this.$emit('biu', this.msg)
+            }
         }
     }
 </script>
