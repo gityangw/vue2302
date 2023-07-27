@@ -10,7 +10,7 @@ import CommonNav from './CommonNav.vue';
 export default {
     data() {
         return {
-            msg: ''
+            msg: '111'
         }
     },
     methods: {
