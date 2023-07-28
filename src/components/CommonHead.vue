@@ -1,24 +1,36 @@
 <template>
-  <h2>这是父组件</h2>
-
-  <hr />
-  <common-nav></common-nav>
-  <hr />
-  <common-nav2></common-nav2>
+  <div>
+    <ul>
+      <li v-for="cate in cates" :key="cate.id">
+        <img :src="cate.icon" width="100" alt="" />
+        <h3>
+          {{ cate.name }}
+        </h3>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
-import CommonNav from "./CommonNav.vue";
-import CommonNav2 from "./CommonNav2.vue";
+import axios from "axios";
 export default {
-  provide: {
-    a: 20,
-    b: 20,
-    c: 40,
+  data() {
+    return {
+      cates: [],
+    };
   },
-  components: {
-    CommonNav,
-    CommonNav2,
+  methods: {
+    fetchCates() {
+      axios.get("https://api.it120.cc/conner/cms/category/list").then((res) => {
+        if (res.data.code === 0) {
+          console.log(res);
+          this.cates = res.data.data;
+        }
+      });
+    },
+  },
+  created() {
+    this.fetchCates();
   },
 };
 </script>
