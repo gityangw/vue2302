@@ -13,7 +13,7 @@
         },
         methods: {
             emitMsg() {
-                emitter.$emit('biu', this.msg)
+                emitter.emit('biu', this.msg)
             }
         }
     }

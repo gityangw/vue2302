@@ -12,7 +12,7 @@
             }
         },
         mounted(){
-        emitter.on('biubiu', function(msg){
+        emitter.on('biu', function(msg){
         console.log('我收到兄弟的通信', msg);
         console.log(this);
         this.msg = msg;
