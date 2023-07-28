@@ -2,7 +2,9 @@
   <button @click="isShow = !isShow">
     {{ isShow ? "点击停用" : "点击显示" }}
   </button>
-  <common-head v-if="isShow" />
+  <keep-alive>
+    <common-head v-if="isShow" />
+  </keep-alive>
 </template>
 
 <script>
