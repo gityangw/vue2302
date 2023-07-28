@@ -1,26 +1,17 @@
 <template>
-   这是子组件2
-   {{ msg }}
+  这是子组件2
+  {{ c }}
 </template>
 
 <script>
-    import emitter from '@/assets/mitt'
-    export default {
-        data() {
-            return {
-                msg: ''
-            }
-        },
-        mounted(){
-        emitter.on('biu', function(msg){
-        console.log('我收到兄弟的通信', msg);
-        console.log(this);
-        this.msg = msg;
-    }.bind(this))
-  }
-    }
+export default {
+  inject: ["c"],
+  data() {
+    return {
+      msg: "",
+    };
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
