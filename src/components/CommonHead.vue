@@ -1,36 +1,49 @@
 <template>
   <div>
-    <ul>
-      <li v-for="cate in cates" :key="cate.id">
-        <img :src="cate.icon" width="100" alt="" />
-        <h3>
-          {{ cate.name }}
-        </h3>
-      </li>
-    </ul>
+    <div class="swiper container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">slider1</div>
+        <div class="swiper-slide">slider2</div>
+        <div class="swiper-slide">slider3</div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import Swiper from "swiper";
+import "swiper/css";
 export default {
   data() {
     return {
-      cates: [],
+      swiper: null,
     };
   },
-  methods: {
-    fetchCates() {
-      axios.get("https://api.it120.cc/conner/cms/category/list").then((res) => {
-        if (res.data.code === 0) {
-          console.log(res);
-          this.cates = res.data.data;
-        }
-      });
-    },
+  mounted() {
+    this.initSwiper();
   },
-  created() {
-    this.fetchCates();
+  methods: {
+    initSwiper() {
+      const swiper = new Swiper(".swiper", {
+        autoplay: true,
+      });
+      this.swiper = swiper;
+    },
   },
 };
 </script>
+<style scoped>
+.container {
+  width: 800px;
+  height: 600px;
+  margin: 20px auto;
+}
+.swiper-slide {
+  width: 800px;
+  height: 600px;
+  background-color: #e49393;
+}
+.swiper-slide:nth-child(2n) {
+  background-color: #e49393;
+}
+</style>
