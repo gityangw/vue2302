@@ -1,34 +1,32 @@
 <template>
   <div>
-    <div class="swiper container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">slider1</div>
-        <div class="swiper-slide">slider2</div>
-        <div class="swiper-slide">slider3</div>
-      </div>
-    </div>
+    <h2>组件</h2>
   </div>
 </template>
 
 <script>
-import Swiper from "swiper";
-import "swiper/css";
 export default {
   data() {
     return {
-      swiper: null,
+      timer: null,
     };
   },
   mounted() {
-    this.initSwiper();
+    console.log("组件初始化");
+    const timer = setInterval(() => {
+      console.log("运行了");
+    }, 1000);
+    this.timer = timer;
+    window.onscroll = () => {
+      console.log("触发滚动");
+    };
   },
-  methods: {
-    initSwiper() {
-      const swiper = new Swiper(".swiper", {
-        autoplay: true,
-      });
-      this.swiper = swiper;
-    },
+  beforeUnmount() {
+    clearInterval(this.timer);
+    window.onscroll = null;
+  },
+  unmounted() {
+    console.log("卸载了");
   },
 };
 </script>
