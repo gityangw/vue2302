@@ -1,30 +1,44 @@
 <template>
   <div>
-    <h1>父组件</h1>
-    <common-child>
-      <template #default="{ c, title }">
-        <h2>{{ c }}</h2>
-        <button>这是传入默认内容插槽 {{ title }}</button>
-      </template>
-      <template v-slot:header="data">
-        <h2>这是传入 header插槽的 {{ data.a }}</h2>
-        <i>{{ data.b }}</i>
-      </template>
-      <template #footer="data">
-        <h2>{{ data.a }}</h2>
-        <i>{{ data.c }}</i>
-      </template>
-    </common-child>
+    <button @click="isShow = !isShow">
+      {{ isShow ? "点击隐藏" : "点击显示" }}
+    </button>
+    <transition name="ani1">
+      <div v-if="isShow" class="box"></div>
+    </transition>
   </div>
 </template>
 
 <script>
-import CommonChild from "./CommonChild.vue";
 export default {
-  components: {
-    CommonChild,
+  data() {
+    return {
+      isShow: true,
+    };
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+/* 定义入场初始状态 */
+.ani1-enter-from {
+  transform: translateX(-500px) rotate(-360deg) scale(0.1);
+  opacity: 0;
+}
+/* 过渡类中使用 transition */
+.ani1-enter-active,
+.ani1-leave-active {
+  transition: all 1s;
+}
+/* 定义出场最终状态样式 */
+.ani1-leave-to {
+  transform: translateX(500px) rotate(360deg) scale(0.1);
+  opacity: 0;
+}
+.box {
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
+  background-color: #b2cb41;
+}
+</style>
