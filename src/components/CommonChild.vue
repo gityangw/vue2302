@@ -1,8 +1,14 @@
 <template>
   <div>
-    <h2>子组件头部</h2>
-    <h2>子组件尾部</h2>
-    <slot></slot>
+    <header>
+      <slot name="header"></slot>
+    </header>
+    <main>
+      <slot></slot>
+    </main>
+    <footer>
+      <slot name="footer"></slot>
+    </footer>
   </div>
 </template>
 

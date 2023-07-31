@@ -2,11 +2,15 @@
   <div>
     <h1>父组件</h1>
     <common-child>
-      <div>
-        <button>哈哈哈</button>
-        <div>蠢驴</div>
-        <i>哈哈哈</i>
-      </div>
+      <h2>这是默认的内容插槽</h2>
+      <button>这是默认按钮</button>
+      <template v-slot:header>
+        <h2>这是传入的header插槽</h2>
+        <i>这是传入给header插槽的内容</i>
+      </template>
+      <template #footer>
+        <mark>这是传给footer的</mark>
+      </template>
     </common-child>
   </div>
 </template>
@@ -20,4 +24,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+mark {
+  background-color: orange;
+}
+</style>
