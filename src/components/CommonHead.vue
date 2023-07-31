@@ -1,137 +1,61 @@
 <template>
-  <div class="todo-container">
-    <div class="todo-header">
-      <input type="text" v-model.trim="inputTxt" />
-      <button @click="addTodo">新增</button>
-    </div>
-    <div class="todo-list">
-      <div class="todo zanwu" v-if="todos.length === 0">暂无待办事项</div>
-      <transition-group name="ani">
-        <div
-          :class="[
-            'todo',
-            {
-              done: todo.done,
-              undone: !todo.done,
-            },
-          ]"
-          v-for="(todo, index) in todos"
-          :key="index"
-        >
-          <span>{{ todo.content }}</span>
-          <div class="actions">
-            {{ index }}
-            <button @click="delTodo(index)">删除</button>
-            <button @click="setTodoDone(index)" :disabled="todo.done">
-              {{ todo.done ? "已完成" : "点击完成" }}
-            </button>
-          </div>
-        </div>
-      </transition-group>
-    </div>
+  <div>
+    <ul>
+      <li v-for="cate in cates" :key="cate.id">
+        <img :src="cate.icon" alt="" />
+        <h3>{{ cate.name }}</h3>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
-      inputTxt: "",
-      todos: [
-        {
-          content: "明天去打针",
-          done: false,
-        },
-        {
-          content: "周末团建",
-          done: true,
-        },
-        {
-          content: "xxxxxx",
-          done: false,
-        },
-      ],
+      cates: [],
     };
   },
   methods: {
-    // 设置待办事项已完成
-    setTodoDone(index) {
-      this.todos[index].done = true;
+    fetchCates() {
+      axios
+        .get("https://api.it120.cc/conner/cms/category/list", {
+          params: {
+            page: 1,
+            pageSize: 10,
+          },
+        })
+        .then((res) => {
+          if (res.data.code === 0) {
+            this.cates = res.data.data;
+          }
+        });
     },
-    // 新增待办事项
-    addTodo() {
-      console.log(this);
-      if (this.inputTxt === "") {
-        return false;
-      }
-      this.todos.push({
-        content: this.inputTxt,
-        done: false,
-      });
-      this.inputTxt = ""; // 清空input value
-    },
-    // 删除待办事项
-    delTodo(index) {
-      if (confirm("此操作会彻底删除待办事项,继续吗?")) {
-        this.todos.splice(index, 1);
-      }
-    },
+  },
+  created() {
+    this.fetchCates();
   },
 };
 </script>
 
 <style scoped>
-.todo-container {
-  width: 600px;
-  padding: 15px;
-  border: 1px solid #666;
-  border-radius: 10px;
-  margin: 20px auto;
-}
-.todo-header {
-  height: 40px;
+ul {
+  height: 90vh;
+  list-style: none;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #666;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-}
-.todo-header input {
-  flex: 1;
-  height: 80%;
-  margin-right: 10px;
-  border-radius: 5px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-content: space-around;
 }
 
-.todo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
+ul li img {
+  width: 100px;
+  height: 100px;
 }
-.todo.zanwu {
+
+ul li {
+  width: 20%;
   text-align: center;
-  line-height: 50px;
-  justify-content: center;
-}
-.todo.done {
-  background-color: #a39f9f;
-  color: #fafafa;
-}
-.todo.undone {
-  background-color: #de4c4c;
-}
-.ani-enter-from {
-  transform: translateX(-100%);
-  opacity: 0;
-}
-.ani-leave-to {
-  transform: translateX(100%);
-  opacity: 0;
-}
-.ani-enter-active,
-.ani-leave-active {
-  transition: all 1s;
 }
 </style>
