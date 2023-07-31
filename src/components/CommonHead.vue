@@ -1,47 +1,25 @@
 <template>
   <div>
-    <button @click="showModal">显示</button>
-    <Teleport to="body">
-      <div class="mask" v-if="isShow" @click.self="hideModal">
-        <div class="content">这是内容</div>
-      </div>
-    </Teleport>
+    <button @click="changeMsg">修改msg</button>
+    {{ msg }}
+    <hr />
+    {{ reverseMsg }}
   </div>
 </template>
 
 <script>
+import mixin1 from "@/mixins/mixin1";
 export default {
   data() {
     return {
-      isShow: false,
+      msg: "组件自己的数据",
     };
   },
-  methods: {
-    showModal() {
-      this.isShow = true;
-    },
-    hideModal() {
-      this.isShow = false;
-    },
+  mixins: [mixin1],
+  mounted() {
+    console.log(this);
   },
 };
 </script>
 
-<style scoped>
-.mask {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.content {
-  width: 40%;
-  height: 40%;
-  background-color: #fff;
-}
-</style>
+<style scoped></style>
