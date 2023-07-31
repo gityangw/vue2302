@@ -1,6 +1,11 @@
 <template>
   <div>
-    <input type="text" v-model="msg" />
+    <button @click="showModal">显示</button>
+    <Teleport to="body">
+      <div class="mask" v-if="isShow" @click.self="hideModal">
+        <div class="content">这是内容</div>
+      </div>
+    </Teleport>
   </div>
 </template>
 
@@ -8,21 +13,35 @@
 export default {
   data() {
     return {
-      msg: "",
+      isShow: false,
     };
   },
-  mounted() {
-    console.log("组件初始化");
-  },
-  unmounted() {
-    console.log("组件卸载");
-  },
-  activated() {
-    console.log("组件使用了");
-  },
-  deactivated() {
-    console.log("组件停用了");
+  methods: {
+    showModal() {
+      this.isShow = true;
+    },
+    hideModal() {
+      this.isShow = false;
+    },
   },
 };
 </script>
-<style scoped></style>
+
+<style scoped>
+.mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.content {
+  width: 40%;
+  height: 40%;
+  background-color: #fff;
+}
+</style>
