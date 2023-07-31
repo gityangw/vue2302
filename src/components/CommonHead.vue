@@ -38,18 +38,18 @@ export default {
       });
     },
     fetchCates() {
-      axios
-        .get("https://api.it120.cc/conner/cms/category/list", {
-          params: {
-            page: 1,
-            pageSize: 10,
-          },
-        })
-        .then((res) => {
-          if (res.data.code === 0) {
-            this.cates = res.data.data;
-          }
-        });
+      axios({
+        url: "https://api.it120.cc/conner/cms/category/list",
+        params: {
+          a: "aaa",
+          b: "bbb",
+        },
+        headers: {
+          bbb: "bbb",
+        },
+      }).then((res) => {
+        console.log(res);
+      });
     },
   },
   created() {
