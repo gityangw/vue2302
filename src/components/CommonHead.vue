@@ -3,8 +3,9 @@
     <button @click="isShow = !isShow">
       {{ isShow ? "点击隐藏" : "点击显示" }}
     </button>
-    <transition name="ani1">
-      <div v-if="isShow" class="box"></div>
+    <transition name="ani1" mode="out-in">
+      <div v-if="isShow" class="box">11</div>
+      <div v-else class="box2">22</div>
     </transition>
   </div>
 </template>
@@ -40,5 +41,12 @@ export default {
   height: 200px;
   margin: 20px auto;
   background-color: #b2cb41;
+}
+
+.box2 {
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
+  background-color: pink;
 }
 </style>
