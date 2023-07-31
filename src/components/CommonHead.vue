@@ -12,13 +12,9 @@
 
 <script>
 import axios from "axios";
-const request = axios.create({
-  baseURL: "https://api.it120.cc/conner",
-  timeout: 8000,
-  headers: {
-    aaa: "aaa",
-  },
-});
+axios.defaults.baseURL = "https://api.it120.cc/conner";
+axios.defaults.timeout = 8000;
+axios.defaults.headers.aaa = "xixixi";
 export default {
   data() {
     return {
@@ -28,10 +24,10 @@ export default {
   },
   methods: {
     fetchArts() {
-      request
+      axios
         .post("/cms/news/list/v2", {
           a: 10,
-          b: 20,
+          b: 10,
         })
         .then((res) => {
           if (res.data.code === 0) {
@@ -40,7 +36,8 @@ export default {
         });
     },
     fetchCates() {
-      request({
+      // /cms/category/list
+      axios({
         url: "/cms/category/list",
         method: "get",
         params: {
