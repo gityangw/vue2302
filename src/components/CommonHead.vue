@@ -20,25 +20,51 @@ export default {
 </script>
 
 <style scoped>
-/* 定义入场初始状态 */
-.ani1-enter-from {
-  transform: translateX(-500px) scale(0.1);
-  opacity: 0;
+@keyframes enter {
+  0% {
+    transform: translateX(-500px) scale(0.1);
+    opacity: 0;
+    background-color: pink;
+  }
+  50% {
+    transform: translateX(-250px) scale(0.5);
+    opacity: 0.5;
+    background-color: red;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    background-color: skyblue;
+  }
 }
-/* 过渡类中使用 transition */
-.ani1-enter-active,
+
+@keyframes leave {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    background-color: skyblue;
+  }
+  50% {
+    transform: translateX(250px) scale(0.5);
+    opacity: 0.5;
+    background-color: red;
+  }
+  100% {
+    transform: translateX(500px) scale(0.1);
+    opacity: 0;
+    background-color: pink;
+  }
+}
+.ani1-enter-active {
+  animation: enter 1s;
+}
 .ani1-leave-active {
-  transition: all 1s;
-}
-/* 定义出场最终状态样式 */
-.ani1-leave-to {
-  transform: translateX(500px) scale(0.1);
-  opacity: 0;
+  animation: leave 1s;
 }
 .box {
   width: 200px;
   height: 200px;
   margin: 20px auto;
-  background-color: #b2cb41;
+  background-color: #19096a;
 }
 </style>
