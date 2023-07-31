@@ -2,14 +2,17 @@
   <div>
     <h1>父组件</h1>
     <common-child>
-      <h2>这是默认的内容插槽</h2>
-      <button>这是默认按钮</button>
-      <template v-slot:header>
-        <h2>这是传入的header插槽</h2>
-        <i>这是传入给header插槽的内容</i>
+      <template #default="{ c, title }">
+        <h2>{{ c }}</h2>
+        <button>这是传入默认内容插槽 {{ title }}</button>
       </template>
-      <template #footer>
-        <mark>这是传给footer的</mark>
+      <template v-slot:header="data">
+        <h2>这是传入 header插槽的 {{ data.a }}</h2>
+        <i>{{ data.b }}</i>
+      </template>
+      <template #footer="data">
+        <h2>{{ data.a }}</h2>
+        <i>{{ data.c }}</i>
       </template>
     </common-child>
   </div>
@@ -24,8 +27,4 @@ export default {
 };
 </script>
 
-<style scoped>
-mark {
-  background-color: orange;
-}
-</style>
+<style scoped></style>
