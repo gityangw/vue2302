@@ -1,23 +1,20 @@
 <template>
   <div>
-    <button @click="changeMsg">修改msg</button>
-    {{ msg }}
-    <hr />
-    {{ reverseMsg }}
+    <h1>父组件</h1>
+    <common-child>
+      <div>
+        <button>哈哈哈</button>
+        <i>哈哈哈</i>
+      </div>
+    </common-child>
   </div>
 </template>
 
 <script>
-import mixin1 from "@/mixins/mixin1";
+import CommonChild from "./CommonChild.vue";
 export default {
-  data() {
-    return {
-      msg: "组件自己的数据",
-    };
-  },
-  mixins: [mixin1],
-  mounted() {
-    console.log(this);
+  components: {
+    CommonChild,
   },
 };
 </script>
