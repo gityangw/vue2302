@@ -12,6 +12,13 @@
 
 <script>
 import axios from "axios";
+const request = axios.create({
+  baseURL: "https://api.it120.cc/conner",
+  timeout: 8000,
+  headers: {
+    aaa: "aaa",
+  },
+});
 export default {
   data() {
     return {
@@ -21,31 +28,24 @@ export default {
   },
   methods: {
     fetchArts() {
-      axios({
-        url: "https://api.it120.cc/conner/cms/news/list/v2",
-        method: "post",
-        data: {
+      request
+        .post("/cms/news/list/v2", {
           a: 10,
           b: 20,
-        },
-        headers: {
-          aaa: "xixixi",
-        },
-      }).then((res) => {
-        if (res.data.code === 0) {
-          this.arts = res.data.data.result;
-        }
-      });
+        })
+        .then((res) => {
+          if (res.data.code === 0) {
+            this.arts = res.data.data.result;
+          }
+        });
     },
     fetchCates() {
-      axios({
-        url: "https://api.it120.cc/conner/cms/category/list",
+      request({
+        url: "/cms/category/list",
+        method: "get",
         params: {
-          a: "aaa",
-          b: "bbb",
-        },
-        headers: {
-          bbb: "bbb",
+          a: 10,
+          b: 20,
         },
       }).then((res) => {
         console.log(res);
