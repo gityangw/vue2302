@@ -1,12 +1,34 @@
 <template>
-  <div>
-    <button @click="isShow = !isShow">
-      {{ isShow ? "点击隐藏" : "点击显示" }}
-    </button>
-    <transition name="ani1" mode="out-in">
-      <div v-if="isShow" class="box">11</div>
-      <div v-else class="box2">22</div>
-    </transition>
+  <div class="todo-container">
+    <div class="todo-header">
+      <input type="text" v-model.trim="inputTxt" />
+      <button @click="addTodo">新增</button>
+    </div>
+    <div class="todo-list">
+      <div class="todo zanwu" v-if="todos.length === 0">暂无待办事项</div>
+      <transition-group name="ani">
+        <div
+          :class="[
+            'todo',
+            {
+              done: todo.done,
+              undone: !todo.done,
+            },
+          ]"
+          v-for="(todo, index) in todos"
+          :key="index"
+        >
+          <span>{{ todo.content }}</span>
+          <div class="actions">
+            {{ index }}
+            <button @click="delTodo(index)">删除</button>
+            <button @click="setTodoDone(index)" :disabled="todo.done">
+              {{ todo.done ? "已完成" : "点击完成" }}
+            </button>
+          </div>
+        </div>
+      </transition-group>
+    </div>
   </div>
 </template>
 
@@ -14,39 +36,102 @@
 export default {
   data() {
     return {
-      isShow: true,
+      inputTxt: "",
+      todos: [
+        {
+          content: "明天去打针",
+          done: false,
+        },
+        {
+          content: "周末团建",
+          done: true,
+        },
+        {
+          content: "xxxxxx",
+          done: false,
+        },
+      ],
     };
+  },
+  methods: {
+    // 设置待办事项已完成
+    setTodoDone(index) {
+      this.todos[index].done = true;
+    },
+    // 新增待办事项
+    addTodo() {
+      console.log(this);
+      if (this.inputTxt === "") {
+        return false;
+      }
+      this.todos.push({
+        content: this.inputTxt,
+        done: false,
+      });
+      this.inputTxt = ""; // 清空input value
+    },
+    // 删除待办事项
+    delTodo(index) {
+      if (confirm("此操作会彻底删除待办事项,继续吗?")) {
+        this.todos.splice(index, 1);
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
-/* 定义入场初始状态 */
-.ani1-enter-from {
-  transform: translateX(-500px) rotate(-360deg) scale(0.1);
-  opacity: 0;
-}
-/* 过渡类中使用 transition */
-.ani1-enter-active,
-.ani1-leave-active {
-  transition: all 1s;
-}
-/* 定义出场最终状态样式 */
-.ani1-leave-to {
-  transform: translateX(500px) rotate(360deg) scale(0.1);
-  opacity: 0;
-}
-.box {
-  width: 200px;
-  height: 200px;
+.todo-container {
+  width: 600px;
+  padding: 15px;
+  border: 1px solid #666;
+  border-radius: 10px;
   margin: 20px auto;
-  background-color: #b2cb41;
+}
+.todo-header {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #666;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+.todo-header input {
+  flex: 1;
+  height: 80%;
+  margin-right: 10px;
+  border-radius: 5px;
 }
 
-.box2 {
-  width: 200px;
-  height: 200px;
-  margin: 20px auto;
-  background-color: pink;
+.todo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.todo.zanwu {
+  text-align: center;
+  line-height: 50px;
+  justify-content: center;
+}
+.todo.done {
+  background-color: #a39f9f;
+  color: #fafafa;
+}
+.todo.undone {
+  background-color: #de4c4c;
+}
+.ani-enter-from {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.ani-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
+}
+.ani-enter-active,
+.ani-leave-active {
+  transition: all 1s;
 }
 </style>
