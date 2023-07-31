@@ -1,9 +1,10 @@
 <template>
   <div>
     <ul>
-      <li v-for="cate in cates" :key="cate.id">
-        <img :src="cate.icon" alt="" />
-        <h3>{{ cate.name }}</h3>
+      <li v-for="art in arts" :key="art.id">
+        <h3>作者:{{ art.author || "佚名" }}</h3>
+        <h3>文章标题：{{ art.title }}</h3>
+        <img :src="art.pic" alt="" width="100" />
       </li>
     </ul>
   </div>
@@ -14,10 +15,28 @@ import axios from "axios";
 export default {
   data() {
     return {
+      arts: [],
       cates: [],
     };
   },
   methods: {
+    fetchArts() {
+      axios({
+        url: "https://api.it120.cc/conner/cms/news/list/v2",
+        method: "post",
+        data: {
+          a: 10,
+          b: 20,
+        },
+        headers: {
+          aaa: "xixixi",
+        },
+      }).then((res) => {
+        if (res.data.code === 0) {
+          this.arts = res.data.data.result;
+        }
+      });
+    },
     fetchCates() {
       axios
         .get("https://api.it120.cc/conner/cms/category/list", {
@@ -34,28 +53,10 @@ export default {
     },
   },
   created() {
+    this.fetchArts();
     this.fetchCates();
   },
 };
 </script>
 
-<style scoped>
-ul {
-  height: 90vh;
-  list-style: none;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  align-content: space-around;
-}
-
-ul li img {
-  width: 100px;
-  height: 100px;
-}
-
-ul li {
-  width: 20%;
-  text-align: center;
-}
-</style>
+<style scoped></style>
