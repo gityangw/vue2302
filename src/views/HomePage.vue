@@ -10,4 +10,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+h1 {
+  text-align: center;
+}
+</style>
