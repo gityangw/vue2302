@@ -1,23 +1,14 @@
 <template>
-  <common-head />
+  <router-link to="/"> 首页 </router-link>
+  <router-link :to="{ path: '/news' }">新闻 </router-link>
+  <router-link to="/about">关于我们 </router-link>
+
+  <hr />
+  <router-view></router-view>
 </template>
 
-<script>
-import CommonHead from "@/components/CommonHead.vue";
-export default {
-  data() {
-    return {
-      isShow: true,
-    };
-  },
-  components: {
-    CommonHead,
-  },
-};
-</script>
-
 <style scoped>
-h2 {
+.router-link-active {
   color: red;
 }
 </style>
