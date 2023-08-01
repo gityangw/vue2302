@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>这是新闻页</h1>
-    <hr />
   </div>
 </template>
 
