@@ -2,9 +2,14 @@ import { createRouter , createWebHashHistory} from 'vue-router';
 import HomePageVue from '@/views/HomePage.vue';
 import NewsPageVue from '@/views/NewsPage.vue';
 import AboutPageVue from '@/views/AboutPage.vue';
+import NotFound from '@/views/NotFound.vue'
 const routes = [
     {
-        path: '/',
+        path:'/',
+        redirect:'/home'
+    },
+    {
+        path: '/home',
         component: HomePageVue
     },
     {
@@ -14,6 +19,10 @@ const routes = [
     {
         path:'/about',
         component: AboutPageVue
+    },
+    {
+        path:'/:pathMatch(.*)*',
+        component: NotFound
     }
 ];
 
