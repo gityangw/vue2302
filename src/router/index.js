@@ -3,7 +3,6 @@ import HomePageVue from '@/views/HomePage.vue';
 import NewsPageVue from '@/views/NewsPage.vue';
 import AboutPageVue from '@/views/AboutPage.vue';
 import NotFound from '@/views/NotFound.vue';
-
 const routes = [
     {
         path:'/',
