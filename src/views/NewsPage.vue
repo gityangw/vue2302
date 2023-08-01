@@ -1,6 +1,10 @@
 <template>
   <div>
     <h1>这是新闻页</h1>
+    <hr />
+    <router-link to="/news/native">国内新闻</router-link>
+    <router-link to="/news/abroad">国外新闻</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -10,4 +14,12 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.router-link-exact-active {
+  color: #aaa;
+}
+a {
+  text-decoration: none;
+  color: block;
+}
+</style>
