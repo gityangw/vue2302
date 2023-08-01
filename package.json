@@ -13,7 +13,8 @@
     "emitt": "^1.3.4",
     "mitt": "^3.0.1",
     "swiper": "^10.0.4",
-    "vue": "^3.2.13"
+    "vue": "^3.2.13",
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
