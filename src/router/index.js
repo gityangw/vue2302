@@ -21,16 +21,11 @@ const routes = [
             needAuth: true,
         },
         name: 'news',
-        beforeEnter: (to, from) => {
-            // ...
-            if(!isLogin()){
-                return '/login'
-            }
-        },
+
         component: NewsPageVue
     },
     {
-        path: '/about',
+        path: '/about/:id',
         name: 'about',
         component: AboutPageVue
       },

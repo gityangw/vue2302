@@ -21,7 +21,7 @@
   </button>
   <button
     :class="{ active: $route.path === '/about' }"
-    @click="$router.replace('/about')"
+    @click="$router.replace('/about/2')"
   >
     关于我们
   </button>

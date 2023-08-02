@@ -6,7 +6,10 @@
 
 <script>
 export default {
-  name: "AboutPage",
+  // name: "AboutPage",
+  beforeRouteUpdate(to, from) {
+    console.log(to, from);
+  },
 };
 </script>
 

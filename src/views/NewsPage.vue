@@ -8,8 +8,17 @@
 <script>
 export default {
   name: "NewsPage",
-  mounted() {
-    console.log(this.$route);
+
+  beforeRouteEnter(to, from, next) {
+    console.log(this);
+    next((vm) => {
+      console.log(vm);
+    });
+  },
+  beforeRouteLeave(to, from, next) {
+    if (confirm("确定要离开吗")) {
+      next();
+    }
   },
 };
 </script>
