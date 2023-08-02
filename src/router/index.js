@@ -1,4 +1,4 @@
-import { createRouter , createWebHistory} from 'vue-router';
+import { createRouter , createWebHashHistory} from 'vue-router';
 import HomePageVue from '@/views/HomePage.vue';
 import NewsPageVue from '@/views/NewsPage.vue';
 import AboutPageVue from '@/views/AboutPage.vue';
@@ -21,6 +21,12 @@ const routes = [
             needAuth: true,
         },
         name: 'news',
+        beforeEnter: (to, from) => {
+            // ...
+            if(!isLogin()){
+                return '/login'
+            }
+        },
         component: NewsPageVue
     },
     {
@@ -40,41 +46,7 @@ const routes = [
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes
-})
-//写法一
-// router.beforeEach((to,from,next)=>{
-//     // const passRoutes = ['/login','/register']
-//     if(to.meta.needAuth){
-//         if(isLogin()){
-//             next()
-//         }else{
-//             next({
-//                 path: '/login',
-//                 query:{
-//                     from: to.path
-//                 }
-//             })
-//         }
-//     }else{
-//         next()
-//     }
-// })
-
-
-
-//写法二
-router.beforeEach((to,from)=>{
-if(to.meta.needAuth){
-    if(!isLogin()){
-        return {
-            path: '/login', 
-            query: {
-                from: to.path
-            }
-        }
-    }
-}
 })
 export default router
