@@ -1,10 +1,30 @@
 <template>
-  <button @click="$router.push('/home')">首页</button>
-  <button @click="$router.push('/news')">新闻页</button>
-  <button @click="$router.replace('/about')">关于我们</button>
-  <button @click="addRoute">动态添加一个路由</button>
-  <button @click="$router.push('/join')">跳转到这个路由</button>
-  <button @click="$router.go(0)">刷新页面</button>
+  <button
+    :class="{ active: $route.path === '/home' }"
+    @click="$router.push('/home')"
+  >
+    首页
+  </button>
+  <button
+    :class="{ active: $route.path === '/news' }"
+    @click="
+      $router.push({
+        path: '/news',
+        query: {
+          id: 1,
+          a: 10,
+        },
+      })
+    "
+  >
+    新闻页
+  </button>
+  <button
+    :class="{ active: $route.path === '/about' }"
+    @click="$router.replace('/about')"
+  >
+    关于我们
+  </button>
   <router-view></router-view>
 </template>
 <script>
