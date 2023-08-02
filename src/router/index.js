@@ -5,6 +5,7 @@ import AboutPageVue from '@/views/AboutPage.vue';
 import NotFound from '@/views/NotFound.vue';
 import LoginPageVue from '@/views/LoginPage.vue';
 import { isLogin } from '@/utils'
+import children from '@/views/HomeChildren.vue'
 const routes = [
     {
         path:'/',
@@ -16,7 +17,13 @@ const routes = [
         meta: {
             ani: 'slideLeft'
           },
-        component: HomePageVue
+        component: HomePageVue,
+        children:[
+          {
+            path:'/home/children',
+            component: children
+          }
+        ]
     },
     {
         path: '/news',

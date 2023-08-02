@@ -2,6 +2,7 @@
   <div>
     <h1>这是首页</h1>
   </div>
+  <router-link to="/home/children"></router-link>
 </template>
 
 <script>
@@ -10,8 +11,4 @@ export default {
 };
 </script>
 
-<style scoped>
-h1 {
-  text-align: center;
-}
-</style>
+<style scoped></style>
