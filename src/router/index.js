@@ -13,12 +13,16 @@ const routes = [
     {
         path:'/home',
         name:'home',
+        meta: {
+            ani: 'slideLeft'
+          },
         component: HomePageVue
     },
     {
         path: '/news',
         meta:{
             needAuth: true,
+            ani: 'slideRight'
         },
         name: 'news',
 
@@ -27,6 +31,9 @@ const routes = [
     {
         path: '/about/:id',
         name: 'about',
+        meta: {
+            ani: 'slideBottom'
+          },
         component: AboutPageVue
       },
       {

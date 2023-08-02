@@ -25,7 +25,12 @@
   >
     关于我们
   </button>
-  <router-view></router-view>
+  <hr />
+  <router-view v-slot="{ Component }">
+    <transition :name="$route.meta.ani">
+      <component :is="Component" />
+    </transition>
+  </router-view>
 </template>
 <script>
 import JoinUs from "@/views/JoinUs.vue";
@@ -48,5 +53,24 @@ export default {
 a {
   text-decoration: none;
   color: skyblue;
+}
+.slideLeft-enter-from {
+  transform: translateX(-100%);
+}
+.slideLeft-enter-active {
+  transition: all 500ms;
+}
+.slideRight-enter-from {
+  transform: translateX(100%);
+}
+.slideRight-enter-active {
+  transition: all 500ms;
+}
+
+.slideBottom-enter-from {
+  transform: translateY(500px);
+}
+.slideBottom-enter-active {
+  transition: all 500ms;
 }
 </style>
