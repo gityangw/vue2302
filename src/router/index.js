@@ -17,6 +17,9 @@ const routes = [
     },
     {
         path: '/news',
+        meta:{
+            needAuth: true,
+        },
         name: 'news',
         component: NewsPageVue
     },
@@ -40,24 +43,38 @@ const router = createRouter({
     history: createWebHistory(),
     routes
 })
+//写法一
+// router.beforeEach((to,from,next)=>{
+//     // const passRoutes = ['/login','/register']
+//     if(to.meta.needAuth){
+//         if(isLogin()){
+//             next()
+//         }else{
+//             next({
+//                 path: '/login',
+//                 query:{
+//                     from: to.path
+//                 }
+//             })
+//         }
+//     }else{
+//         next()
+//     }
+// })
 
-router.beforeEach((to,from,next)=>{
-    const passRoutes = ['/login','/register']
-    if(passRoutes.includes(to.path)){
-        next()
-    }else{
-        if(isLogin()){
-            next()
-        }else{
-            next({
-                path: '/login',
-                query:{
-                    from: to.path
-                }
-            })
+
+
+//写法二
+router.beforeEach((to,from)=>{
+if(to.meta.needAuth){
+    if(!isLogin()){
+        return {
+            path: '/login', 
+            query: {
+                from: to.path
+            }
         }
-        
     }
+}
 })
-
 export default router
