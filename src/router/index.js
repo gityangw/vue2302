@@ -1,4 +1,4 @@
-import { createRouter , createWebHashHistory} from 'vue-router';
+import { createRouter , createWebHistory} from 'vue-router';
 import HomePageVue from '@/views/HomePage.vue';
 import NewsPageVue from '@/views/NewsPage.vue';
 import AboutPageVue from '@/views/AboutPage.vue';
@@ -30,9 +30,19 @@ const routes = [
 ];
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes
 })
 
+router.beforeEach((to,from)=>{
+    if(to.path == '/about'){
+        return{
+            path: '/news',
+            query: {
+                from: to.path
+            }
+        }
+    }
+})
 
 export default router
